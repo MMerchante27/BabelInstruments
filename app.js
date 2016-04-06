@@ -7,14 +7,18 @@ var bodyParser = require('body-parser');
 
 // Modelos
 require('./models/instrument_model');
+require('./models/user_model');
 
 
 // Rutas de web
 var routes = require('./routes/index');
 var instruments = require('./routes/instruments');
+var users = require('./routes/users');
+
 
 // Rutas de API V1
 var apiInstrument = require('./routes/api/v1/instruments');
+var apiUsers = require('./routes/api/v1/users');
 
 var app = express();
 
@@ -40,9 +44,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Rutas de web
 app.use('/', routes);
 app.use('/instruments', instruments);
+app.use('/users', users);
+
 
 //Rutas de API V1
 app.use('/api/v1/instruments', apiInstrument);
+app.use('/api/v1/users', apiUsers);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

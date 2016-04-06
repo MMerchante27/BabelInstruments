@@ -1,0 +1,128 @@
+"use strict";
+var express = require('express');
+var router = express.Router();
+var mongoose = require('mongoose');
+var crypto = require("crypto");
+var User = mongoose.model('User');
+
+
+
+/*----------------------------Get-----------------------------------------*/
+
+
+
+router.get('/', function(req, res) {
+
+    User.list(function(err, rows) {
+        if (err) {
+            res.send("An error occurred", err);
+            return;
+        }
+        //cuando estén disponibles mando la vista
+        res.json({ result: true, rows: rows });
+        return;
+
+    });
+
+});
+
+/*----------------------------Post-----------------------------------------*/
+
+router.post('/', function(req, res, next) {
+    var auth = req.body.auth;
+    var name = req.body.name;
+    var email = req.body.email;
+    var password = req.body.password;
+    let filter = {};
+    filter.name = name;
+    User.list(filter,'name', function(err, row) {
+        if (err) {
+            res.send('An error ocurred', err);
+            return;
+        }
+        console.log("Fila", row);
+        if (row.length!==0) {
+            if(auth === true){
+                var sha256 = crypto.createHash("sha256");
+                sha256.update(password, "utf8"); //utf8 here
+                var result = sha256.digest("base64");
+                console.log("Password",row.password);
+                if(result === row.password){
+                    res.json({result:true, rows: row});
+                    return;
+                }else res.json({result:false, msg: "Name or password incorrect"});
+
+            } else {
+                if(auth === true){
+                    res.json({result:false, msg: "Name or password incorrect"});
+                } else {
+                    var sha256 = crypto.createHash("sha256");
+                    sha256.update(password, "utf8"); //utf8 here
+                    var result = sha256.digest("base64");
+                    var user = new User({ name: name, email: email, password: result });
+                    user.save(function(err, user) {
+                        if (err) {
+                            console.log("Error!" + err);
+                            return;
+                        }
+                        res.send('Created user.\n' + "Name: " + user.name + "\n" + "Email: " + user.email);
+                        return;
+                     });
+                  }
+                }
+        } else res.send("This user is already registered");
+
+    });
+});
+
+
+
+
+/*----------------------------Delete-----------------------------------------*/
+
+
+router.delete('/:id', function(req, res) {
+    User.remove({ _id: req.params.id }, function(err) {
+        if (err) {
+            res.send("User not found", err);
+            return;
+        }
+        res.json("The user has been deleted");
+    });
+});
+
+/*----------------------------Update-----------------------------------------*/
+
+
+
+router.put('/:id', function(req, res) {
+    //Para actualizar varios hay que usar en options
+    var options = {};
+    // var options = {multi:true}; Para actualizar varios usar multi
+
+    User.findOne({ name: req.body.name }, function(err, row) {
+        if (err) {
+            res.send("Error", err);
+            return;
+        }
+        console.log("Row: ", row);
+        if (!row) {
+            User.update({ _id: req.params.id }, { $set: req.body }, options, function(err, data) {
+                if (err) {
+                    res.send("User not found", err);
+                    return;
+                }
+
+                res.send("The user has been <modified>s</modified>");
+
+            });
+        } else {
+            res.send("This user is already registered");
+
+        }
+
+    });
+
+});
+
+module.exports = router;

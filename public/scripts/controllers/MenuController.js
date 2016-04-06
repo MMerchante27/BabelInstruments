@@ -1,9 +1,9 @@
-angular.module("babelInstruments").controller("MenuController", ["$scope", "$location", "$rootScope", "paths",
-    function($scope, $location, $rootScope, paths) {
+angular.module("babelInstruments").controller("MenuController", ["$scope", "$location", "$rootScope", "paths","logService",
+    function($scope, $location, $rootScope, paths, logService) {
 
         //Scope init
         $scope.model = {
-            selectedItem: paths.login
+            selectedItem: paths.instruments
         };
 
         $scope.userState = "no-logged";
@@ -27,15 +27,15 @@ angular.module("babelInstruments").controller("MenuController", ["$scope", "$loc
             $scope.model.selectedItem = $location.path();
         });
 
-        // logService.subscribeLogin($scope, function somethingChanged() {
+        logService.subscribeLogin($scope, function somethingChanged() {
 
-        //     $scope.userState = "logged";
-        // });
+            $scope.userState = "logged";
+        });
 
-        // logService.subscribeLogout($scope, function somethingChanged() {
+        logService.subscribeLogout($scope, function somethingChanged() {
             
-        //     $scope.userState = "no-logged";
-        // });
+            $scope.userState = "no-logged";
+        });
 
 
     }

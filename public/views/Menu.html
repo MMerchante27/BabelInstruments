@@ -16,31 +16,15 @@
                 <li ng-class="getClassForItem(paths.instruments)">
                     <a href="#{{::paths.instruments}}">Instruments</a>
                 </li>
-
-        <!--
-                <li ng-class="getClassForItem(paths.newMovie)">
-                    <a href="#{{::paths.newMovie}}">Add Movie</a>
-                </li>
-                <li ng-class="getClassForItem(paths.myMovies)">
-                    <a href="#{{::paths.myMovies}}">My Movies</a>
-                </li>
-                <li ng-class="getClassForItem(paths.myRentedMovies)">
-                    <a href="#{{::paths.myRentedMovies}}">My Rented Movies</a>
-                </li>
+                
             </ul>
+          
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <p class="navbar-text" ng-show="userState == 'logged'">Signed in as {{userAuth}}</p>
-                </li>
-                <li ng-class="getClassForItem(paths.login)" ng-show="userState == 'no-logged'">
-                    <a href="#{{::paths.login}}">Login</a>
-                </li>
-                <li ng-class="getClassForItem(paths.logout)" ng-show="userState == 'logged'">
-                    <a href="#{{::paths.logout}}">Logout</a>
-                </li>
+                    <a href="#{{::paths.login}}">
+                        <button type="button" class="btn btn-info">Log in / Sign Up</button>
+                    </a>
             </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+        
     </div>
     <!-- /.container-fluid -->
 </nav>

@@ -1,4 +1,6 @@
 angular.module("babelInstruments").value("apiPaths", {
-    movies: "/api/v1/instruments",
-    movieDetail: "/api/v1/instruments/:id",
+    instruments: "/api/v1/instruments",
+    instrumentsDetail: "/api/v1/instruments/:id",
+    users: "/api/v1/users"
+
 });

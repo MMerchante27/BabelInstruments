@@ -1,0 +1,28 @@
+<div ng-show="type=='bass'">
+	<h1 >Basses</h1>
+</div>
+<div ng-show="type=='guitar'">
+	<h1 >Guitars</h1>
+</div>
+<div ng-show="type=='keys'">
+	<h1 >Keys</h1>
+</div>
+<div ng-show="type=='drums'">
+	<h1 >Drums</h1>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-6" ng-repeat="item in model">
+	
+	<h4 class="text-center">{{::item.name}}</h4>
+	<p>
+	<img src="{{::item.photo}}" alt="">
+	{{::item.description}}
+	{{::item.type}}
+	{{::item.price}}
+	{{::item.brand}}
+	</p>
+</div>
+
+<div ng-include="'views/ProgressBar.html'" ng-show="uiState=='loading'"></div>
+             
+                

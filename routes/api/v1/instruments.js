@@ -47,7 +47,7 @@ router.get('/', function(req, res, next) {
     }
 
     if (req.query.brand !== undefined){
-        filters.brand = eq.query.brand;
+        filters.brand = req.query.brand;
     }
 
     let start = parseInt(req.query.start) || 0;
