@@ -28,13 +28,16 @@ angular.module("babelInstruments").service("APIClient",
 		this.getInstruments = function(type){
 			// url = URL.resolve(apiPaths.instruments, {type:guitars});
 			// console.log(url);
-			url = apiPaths.instruments +"?type=" + type
+			var url = apiPaths.instruments +"?type=" + type
 			return this.apiRequest(url);
 			
 		};
 
 		this.getInstrument = function(instrumentId){
-			var url = URL.resolve(apiPaths.instrumentDetail, {id: instrumentId});
+			console.log("paso por aqui");
+			console.log(instrumentId);
+			var url = apiPaths.instruments + "/?id=" + instrumentId;
+			console.log("ApiURL",url);
 			return this.apiRequest(url);
 		}
 

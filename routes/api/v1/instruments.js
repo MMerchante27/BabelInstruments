@@ -18,6 +18,10 @@ router.get('/', function(req, res, next) {
         var sort = req.query.sort || 'name';
     };
 
+    if (req.query.id !== undefined) {
+        filters._id = req.query.id;
+    };
+
     if (req.query.type !== undefined) {
         filters.type = req.query.type;
     }

@@ -1,5 +1,5 @@
-angular.module("babelInstruments").controller("DrumsListController", ["$scope", "$log", "APIClient","URL","paths",
- function($scope, $log, APIClient, URL, paths) {
+angular.module("babelInstruments").controller("DrumsListController", ["$scope", "$log","$location", "APIClient","URL","paths",
+ function($scope, $log,$location,APIClient, URL, paths) {
 
     // Scope init
     $scope.model = [];
@@ -32,4 +32,8 @@ angular.module("babelInstruments").controller("DrumsListController", ["$scope", 
         }
     );
 
+      $scope.showMore = function(data){       
+            var url = URL.resolve(paths.drumsDetail, { id: data._id });
+            $location.path(url);
+        }
 }]);

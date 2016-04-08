@@ -12,8 +12,10 @@ var User = mongoose.model('User');
 
 
 router.get('/', function(req, res) {
-
-    User.list(function(err, rows) {
+    if (req.query.sort !== undefined) {
+        var sort = req.query.sort || 'name';
+    };
+    User.list({}, sort,function(err, rows) {
         if (err) {
             res.send("An error occurred", err);
             return;
@@ -35,43 +37,51 @@ router.post('/', function(req, res, next) {
     var password = req.body.password;
     let filter = {};
     filter.name = name;
-    User.list(filter,'name', function(err, row) {
+
+    console.log(auth);
+    console.log(name);
+    console.log(password);
+    console.log(filter);
+
+    User.list(filter,'name', function(err, rows) {
         if (err) {
             res.send('An error ocurred', err);
             return;
         }
-        console.log("Fila", row);
-        if (row.length!==0) {
-            if(auth === true){
+        console.log("Fila", rows);
+        console.log("length", rows.length);
+        if (rows.length !== 0) {
+            if (auth === 'true') {
                 var sha256 = crypto.createHash("sha256");
                 sha256.update(password, "utf8"); //utf8 here
                 var result = sha256.digest("base64");
-                console.log("Password",row.password);
-                if(result === row.password){
-                    res.json({result:true, rows: row});
+                console.log("Result", result);
+                console.log("Password", rows[0].password);
+                if (result === rows[0].password) {
+                    res.json({ result: true, rows: rows[0] });
                     return;
-                }else res.json({result:false, msg: "Name or password incorrect"});
-
+                }else res.json({ result: false, msg: "Name or password incorrect" });
+            } 
+            else res.json({ result: false, msg: "This user is already registered" });
+        } else {
+            if (auth === 'true') {
+                res.json({ result: false, msg: "Name or password incorrect" });
             } else {
-                if(auth === true){
-                    res.json({result:false, msg: "Name or password incorrect"});
-                } else {
-                    var sha256 = crypto.createHash("sha256");
-                    sha256.update(password, "utf8"); //utf8 here
-                    var result = sha256.digest("base64");
-                    var user = new User({ name: name, email: email, password: result });
-                    user.save(function(err, user) {
-                        if (err) {
-                            console.log("Error!" + err);
-                            return;
-                        }
-                        res.send('Created user.\n' + "Name: " + user.name + "\n" + "Email: " + user.email);
+                var sha256 = crypto.createHash("sha256");
+                sha256.update(password, "utf8"); //utf8 here
+                var result = sha256.digest("base64");
+                var user = new User({ name: name, email: email, password: result });
+                user.save(function(err, user) {
+                    if (err) {
+                        console.log("Error!" + err);
                         return;
-                     });
-                  }
-                }
-        } else res.send("This user is already registered");
-
+                    }
+                    res.send('Created user.\n' + "Name: " + user.name + "\n" + "Email: " + user.email);
+                    return;
+                });
+            }
+        }
+        
     });
 });
 
@@ -113,7 +123,7 @@ router.put('/:id', function(req, res) {
                     return;
                 }
 
-                res.send("The user has been <modified>s</modified>");
+                res.send("The user has been modified");
 
             });
         } else {

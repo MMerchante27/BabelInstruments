@@ -1,13 +1,13 @@
-<div ng-controller="LoginFormController">
+    <div ng-controller="LoginFormController">
     <h1>Login</h1>
     <div ng-include="views/ProgressBar.html" ng-show="uiState=='loading'"></div>
     <form name="loginForm" novalidate class="form-horizontal" ng-submit="saveUser(credentials)">
         <div class="form-group">
-            <label for="user" class="col-sm-2 control-label" >User</label>
+            <label for="name" class="col-sm-2 control-label" >User</label>
             <div class="div col-sm-10">
-                <input type="text" id="user" name="user" ng-model="credentials.user" required class="form-control" autofocus>
+                <input type="text" id="name" name="name" ng-model="credentials.name" required class="form-control" autofocus>
             </div>
-            <div class="text-danger" ng-show="loginForm.user.$dirty && loginForm.user.$error.required">
+            <div class="text-danger" ng-show="loginForm.name.$dirty && loginForm.name.$error.required">
                 The user name is required
             </div>
         </div>

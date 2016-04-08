@@ -1,16 +1,16 @@
 angular.module("babelInstruments").constant("paths", {
     home: "/",
     login: "/login",
-    // logout: "/logout",
+    logout: "/logout",
     instruments: "/instruments",
-    instrumentDetail: "/instruments/:id",
+    instrumentDetail:"instruments/:id",
+    guitarDetail: "/instruments/guitars/:id",
+    bassDetail: "/instruments/basses/:id",
+    drumsDetail: "/instruments/drums/:id",
+    keysDetail: "/instruments/keys/:id",
     drums: "/instruments/drums",
     guitars: "/instruments/guitars",
     basses: "/instruments/basses",
     keys: "/instruments/keys",
-    // myMovies: "/movies/myMovies",
-    // myRentedMovies: "/movies/myRentedMovies",
-    // newMovie: "/movies/new",
-    // movieDetail: "/movies/:id",
     notFound: "/sorry"
 });

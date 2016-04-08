@@ -16,6 +16,7 @@ angular.module("babelInstruments").service('logService', ["$rootScope",
 
             notifyLogout: function() {
                 $rootScope.$emit('logout');
+                
             }
         };
 

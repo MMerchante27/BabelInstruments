@@ -1,5 +1,5 @@
-angular.module("babelInstruments").controller("GuitarListController", ["$scope", "$log", "APIClient","URL","paths",
- function($scope, $log, APIClient, URL, paths) {
+angular.module("babelInstruments").controller("GuitarListController", ["$scope", "$log","$location", "APIClient","URL","paths",
+ function($scope, $log,$location, APIClient, URL, paths) {
 
     // Scope init
     $scope.model = [];
@@ -15,7 +15,7 @@ angular.module("babelInstruments").controller("GuitarListController", ["$scope",
     APIClient.getInstruments($scope.type).then(
         // Promesa resuelta
         function(data) {
-            $log.log("SUCCESS", data);
+            $log.log("SUCCESS!!!!", data);
             $scope.model = data.instruments;
             if ($scope.model.length == 0) {
                 $scope.uiState = 'blank';
@@ -32,4 +32,10 @@ angular.module("babelInstruments").controller("GuitarListController", ["$scope",
         }
     );
 
+    $scope.showMore = function(data){       
+            var url = URL.resolve(paths.guitarDetail, { id: data._id });
+            $location.path(url);
+        }
+
+   
 }]);

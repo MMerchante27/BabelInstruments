@@ -6,21 +6,24 @@ angular.module("babelInstruments").controller('LoginFormController', ['$scope', 
         $scope.uiState = 'loading';
 
         $scope.credentials = {
-            user: '',
+            name: '',
             password: ''
         };
 
         //Scope methods
         $scope.saveUser = function(credentials) {
-            $scope.credentials.auth = true;
-            authService.saveUserAuth($scope.credentials)
+            $scope.credentials.auth = 'true';
+            authService.saveUserAuth($scope.credentials);
             logService.notifyLogin();
+
+
+            // $scope.$emit("UserChanged", authService.getUserAuth()); 
 
         };
 
         logService.subscribeLogin($scope, function somethingChanged() {
-            console.log("He cambiado a logged");
-            $location.url(paths.instruments);
+          $scope.userState='logged';
+          $location.url(paths.instruments);
 
         });
 

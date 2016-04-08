@@ -1,13 +1,14 @@
-angular.module("babelInstruments").controller("MenuController", ["$scope", "$location", "$rootScope", "paths","logService",
-    function($scope, $location, $rootScope, paths, logService) {
+angular.module("babelInstruments").controller("MenuController", ["$scope", "$location", "$rootScope", "paths","logService","authService","buyService",
+    function($scope, $location, $rootScope, paths, logService, authService,buyService) {
 
         //Scope init
         $scope.model = {
-            selectedItem: paths.instruments
+            selectedItem: paths.instruments,
         };
 
         $scope.userState = "no-logged";
         $scope.paths = paths;
+        $scope.buy = "no-buy";
 
         //Scope methods
 
@@ -20,6 +21,13 @@ angular.module("babelInstruments").controller("MenuController", ["$scope", "$loc
             }
         };
 
+         $scope.refresh = function() {
+            $scope.userAuth = authService.getUserAuth();
+            //console.log("Por aqui");
+
+        };
+
+
         //Scope Watchers
 
 
@@ -27,16 +35,21 @@ angular.module("babelInstruments").controller("MenuController", ["$scope", "$loc
             $scope.model.selectedItem = $location.path();
         });
 
-        logService.subscribeLogin($scope, function somethingChanged() {
-
+       logService.subscribeLogin($scope, function somethingChanged() {
+        console.log('rocio',authService.getUserAuth());
+            $scope.userAuth = authService.getUserAuth();
             $scope.userState = "logged";
+
         });
 
         logService.subscribeLogout($scope, function somethingChanged() {
-            
             $scope.userState = "no-logged";
         });
 
+        buyService.subscribeShop($scope, function somethingChanged(){
+            $scope.buy = "buy";
+        });
 
+        $scope.refresh();
     }
 ]);

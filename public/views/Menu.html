@@ -11,20 +11,33 @@
             <a class="navbar-brand" ng-show="userState == 'logged'" href="#{{::paths.instruments}}">Babel-Instruments</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li ng-class="getClassForItem(paths.instruments)">
                     <a href="#{{::paths.instruments}}">Instruments</a>
                 </li>
-                
             </ul>
-          
             <ul class="nav navbar-nav navbar-right">
-                    <a href="#{{::paths.login}}">
+                 <li>
+                    <p class="navbar-text" ng-show="userState == 'logged'">Signed in as {{userAuth}}</p>
+                </li>
+                <li>
+                    <button ng-click="comprar(model)" class="btn btn-success pull-right" style="width: 40px;height: 40px;padding:0;line-height:1;border-radius: 50px; font-size: 20px;margin-top:11px" ng-show="buy=='buy'">
+                             <i class="fa fa-shopping-cart"></i>
+                    </button>
+                </li>
+
+                <li>
+                    <a href="#{{::paths.login}}" ng-show="userState == 'no-logged'">
                         <button type="button" class="btn btn-info">Log in / Sign Up</button>
                     </a>
+                </li>
+                <li>
+                    <a href="#{{::paths.logout}}" ng-show="userState == 'logged'">
+                        <button type="button" class="btn btn-danger">Log Out</button>
+                    </a>
+                </li>
             </ul>
-        
-    </div>
-    <!-- /.container-fluid -->
+        </div>
+        <!-- /.container-fluid -->
 </nav>

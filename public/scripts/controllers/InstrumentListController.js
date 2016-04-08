@@ -13,7 +13,7 @@ angular.module("babelInstruments").controller('InstrumentListController', ['URL'
 
         $scope.paths = paths;
 
-
+        
         
 
 

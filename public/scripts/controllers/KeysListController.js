@@ -32,4 +32,9 @@ angular.module("babelInstruments").controller("KeysListController", ["$scope", "
         }
     );
 
+     $scope.showMore = function(data){
+            var url = URL.resolve(paths.instrumentDetail, { id: data._id });
+            $location.path(url);
+        }
+
 }]);

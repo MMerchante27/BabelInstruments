@@ -13,11 +13,12 @@ var userSchema = mongoose.Schema({
 });
 
 // Método estático
-userSchema.statics.list = function(cb) {
+userSchema.statics.list = function(filters, sort, cb) {
     // preparamos la query sin ejecutar ( no ponemos callback a find)
-    var query = User.find();
 
+    var query = User.find(filters);
     //añadimos más parámetros a la query
+    query.sort(sort);
 
     //La ejecutamos
     query.exec(function(err, rows) {
@@ -29,9 +30,7 @@ userSchema.statics.list = function(cb) {
         return;
 
     });
+
 };
 //Lo registro en mongoose
 var User = mongoose.model('User', userSchema);
-
-
-
