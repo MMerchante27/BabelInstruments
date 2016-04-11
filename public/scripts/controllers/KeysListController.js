@@ -1,5 +1,5 @@
-angular.module("babelInstruments").controller("KeysListController", ["$scope", "$log", "APIClient","URL","paths",
- function($scope, $log, APIClient, URL, paths) {
+angular.module("babelInstruments").controller("KeysListController", ["$scope", "$log","$location", "APIClient","URL","paths",
+ function($scope, $log,$location, APIClient, URL, paths) {
 
     // Scope init
     $scope.model = [];
@@ -33,7 +33,7 @@ angular.module("babelInstruments").controller("KeysListController", ["$scope", "
     );
 
      $scope.showMore = function(data){
-            var url = URL.resolve(paths.instrumentDetail, { id: data._id });
+            var url = URL.resolve(paths.keysDetail, { id: data._id });
             $location.path(url);
         }
 

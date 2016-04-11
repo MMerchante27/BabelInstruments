@@ -26,6 +26,10 @@ router.get('/', function(req, res, next) {
         filters.type = req.query.type;
     }
 
+    if (req.query.buy !== undefined) {
+        filters.buy = req.query.buy;
+    }
+
     if (req.query.name !== undefined) {
         filters.name = new RegExp('^' + req.query.name, "i");
     }
@@ -115,7 +119,7 @@ router.put('/:id', function(req, res) {
             return;
         }
 
-        res.send("Instrument modified");
+        res.json({ result: true, row: data });
 
     });
 });

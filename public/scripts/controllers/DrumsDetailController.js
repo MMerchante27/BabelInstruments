@@ -26,11 +26,21 @@ angular.module("babelInstruments").controller("DrumsDetailController", ["$scope"
         }
     );
 
-     $scope.comprar = function(data){
-        if(authService.getUserAuth()){
-            buyService.notifyShop();
+     
+    $scope.comprar = function(data) {
+            if (authService.getUserAuth()) {
+                console.log("me compra");
+                data.buy = "true";
+                buyService.notifyShop(data);
+            } else {
+                console.log(data);
+                $location.url(paths.login);
+                // var url = URL.resolve(paths.bassDetail, { id: data._id });
+                // $location.path(url);
+            }
+
         }
-    }
+
 
 
 }]);

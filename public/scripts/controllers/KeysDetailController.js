@@ -1,5 +1,5 @@
 angular.module("babelInstruments").controller("KeysDetailController", ["$scope", "$routeParams", "$location","$sce", "APIClient", "paths","authService", "buyService",
-    function($scope, $routeParams, $location,$sce, APIClient, paths, authService, buyService) {
+    function($scope, $routeParams, $location, $sce, APIClient, paths, authService, buyService) {
 
     // Scope init
     $scope.model = {};
@@ -26,12 +26,20 @@ angular.module("babelInstruments").controller("KeysDetailController", ["$scope",
         }
     );
 
-     $scope.comprar = function(data){
-        if(authService.getUserAuth()){
-            console.log("me compra");
-            buyService.notifyShop();
+     $scope.comprar = function(data) {
+            if (authService.getUserAuth()) {
+                console.log("me compra");
+                data.buy = "true";
+                buyService.notifyShop(data);
+            } else {
+                console.log(data);
+                $location.url(paths.login);
+                // var url = URL.resolve(paths.bassDetail, { id: data._id });
+                // $location.path(url);
+            }
+
         }
-    }
+
 
 
 }]);

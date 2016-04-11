@@ -76,7 +76,7 @@ router.post('/', function(req, res, next) {
                         console.log("Error!" + err);
                         return;
                     }
-                    res.send('Created user.\n' + "Name: " + user.name + "\n" + "Email: " + user.email);
+                    res.json({ result: true, rows: rows[0] });
                     return;
                 });
             }

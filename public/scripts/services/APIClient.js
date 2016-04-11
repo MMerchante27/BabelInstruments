@@ -30,14 +30,18 @@ angular.module("babelInstruments").service("APIClient",
 			// console.log(url);
 			var url = apiPaths.instruments +"?type=" + type
 			return this.apiRequest(url);
-			
+		};
+
+		this.getInstrumentsBuy = function(){
+			// url = URL.resolve(apiPaths.instruments, {type:guitars});
+			// console.log(url);
+			var url = apiPaths.instruments +"?buy=true";
+			return this.apiRequest(url);
 		};
 
 		this.getInstrument = function(instrumentId){
-			console.log("paso por aqui");
-			console.log(instrumentId);
+		
 			var url = apiPaths.instruments + "/?id=" + instrumentId;
-			console.log("ApiURL",url);
 			return this.apiRequest(url);
 		}
 
@@ -61,7 +65,7 @@ angular.module("babelInstruments").service("APIClient",
 		this.modifyInstrument = function(instrument){
 			var deferred = $q.defer();
 
-			var url = URL.resolve(apiPaths.instrumentDetail, {id: instrument.id});
+			var url = URL.resolve(apiPaths.instrumentDetail, {id: instrument._id});
 
 			$http.put(url, instrument).then(
 				function(response){

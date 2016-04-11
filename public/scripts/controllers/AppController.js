@@ -1,4 +1,4 @@
-angular.module("babelInstruments").controller("AppController", ["$scope", "$location", "paths","authService","logService",
+    angular.module("babelInstruments").controller("AppController", ["$scope", "$location", "paths","authService","logService",
     function($scope, $location, paths, authService, logService) {
         var controller = this;
         //Controller properties

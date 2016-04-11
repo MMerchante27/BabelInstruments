@@ -1,5 +1,5 @@
-angular.module("babelInstruments").controller("GuitarDetailController", ["$scope", "$routeParams", "$location","$sce", "APIClient", "paths", 
-    function($scope, $routeParams, $location,$sce, APIClient, paths) {
+angular.module("babelInstruments").controller("GuitarDetailController", ["$scope", "$routeParams", "$location","$sce", "APIClient","authService", "paths","buyService",
+    function($scope, $routeParams, $location,$sce, APIClient, authService, paths, buyService) {
 
     // Scope init
     $scope.model = {};
@@ -25,6 +25,20 @@ angular.module("babelInstruments").controller("GuitarDetailController", ["$scope
             $location.url(paths.notFound);
         }
     );
+
+    
+     $scope.comprar = function(data) {
+            if (authService.getUserAuth()) {
+                console.log("me compra");
+                data.buy = "true";
+                buyService.notifyShop(data);
+            } else {
+                console.log(data);
+                $location.url(paths.login);
+                // var url = URL.resolve(paths.bassDetail, { id: data._id });
+                // $location.path(url);
+            }
+        }
 
 
 }]);

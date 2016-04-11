@@ -1,9 +1,9 @@
-    <div ng-controller="LoginFormController">
+<div ng-controller="LoginFormController">
     <h1>Login</h1>
     <div ng-include="views/ProgressBar.html" ng-show="uiState=='loading'"></div>
     <form name="loginForm" novalidate class="form-horizontal" ng-submit="saveUser(credentials)">
         <div class="form-group">
-            <label for="name" class="col-sm-2 control-label" >User</label>
+            <label for="name" class="col-sm-2 control-label">User</label>
             <div class="div col-sm-10">
                 <input type="text" id="name" name="name" ng-model="credentials.name" required class="form-control" autofocus>
             </div>
@@ -24,4 +24,9 @@
             <button class="btn btn-primary pull-right" type="submit" ng-disabled="loginForm.$invalid">Login</button>
         </div>
     </form>
+    <br>
+    <br>
+    <div class="alert alert-info text-center" role="alert">If you don't have an account, sing up now for free <br>
+        <button ng-click="signUp()" class="btn btn-primary" type="submit" style="margin:10px 0 0 0;">Sign up!</button>
+    </div>
 </div>

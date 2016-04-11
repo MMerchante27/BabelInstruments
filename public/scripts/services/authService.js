@@ -11,8 +11,8 @@ angular.module("babelInstruments").service('authService', ["$location","$window"
                       logService.notifyLogin();
 
                   }else {
-                    $window.alert("Incorrect credentials");
                     $location.path(paths.login);
+                    $window.alert("Incorrect credentials");
                     console.log("Fuera");
                   }
                 },

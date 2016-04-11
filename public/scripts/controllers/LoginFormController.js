@@ -21,11 +21,21 @@ angular.module("babelInstruments").controller('LoginFormController', ['$scope', 
 
         };
 
+        $scope.signUp = function(){
+            $location.url(paths.signup);
+        };
+
         logService.subscribeLogin($scope, function somethingChanged() {
           $scope.userState='logged';
-          $location.url(paths.instruments);
+           if ($scope.auth === true) {
+                    var url = URL.resolve(paths.bassDetail, { id: data._id });
+                    $location.path(url);
+                } else $location.url(paths.instruments);
+
 
         });
+
+
 
     }
 ]);

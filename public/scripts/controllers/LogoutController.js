@@ -13,7 +13,10 @@ angular.module("babelInstruments").controller('LogoutController', ['$scope', "$l
         logService.subscribeLogout($scope, function somethingChanged() {
             console.log("He cambiado a no-logged");
             authService.logoutUser();
+            $scope.userState = 'no-logged';
+            $scope.buy = 'no-buy';
             $location.url(paths.home);
+
 
         });
 

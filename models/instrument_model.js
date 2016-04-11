@@ -14,7 +14,8 @@ var instrumentSchema = mongoose.Schema({
     brand: String,
     description: String,
     sound_url: String,
-    video_url: String
+    video_url: String,
+    buy: String
 });
 
 // Método estático

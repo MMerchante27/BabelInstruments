@@ -8,35 +8,5 @@
     </div>
     <div ng-include="'views/ProgressBar.html'" ng-show="uiState == 'loading'">
     </div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Appearence</th>
-                <th>Model</th>
-                <th>Brand</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tr ng-repeat="item in model | filter:query">
-            <td>
-                <img height="200" ng-src="{{::item.photo}}" alt="{{::item.name}}'s poster" title="{{::item.name}}">
-            </td>
-            <td>
-                {{::item.name}}
-            </td>
-            <td>
-                {{::item.brand}}
-            </td>
-            <td>
-                {{::item.price}}
-            </td>
-            <td>
-                <button class="btn btn-info" ng-click="showMore(item)">View more</button>
-            </td>
-        </tr>
-        <tbody>
-        </tbody>
-    </table>
-    <div ng-include="'views/ProgressBar.html'" ng-show="uiState=='loading'"></div>
+    <instrument-item-list ng-show="uiState == 'ideal'" model='model' show-more="showMore(stuff)" ></instrument-item-list>
 </div>

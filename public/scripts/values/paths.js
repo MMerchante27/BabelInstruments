@@ -2,6 +2,7 @@ angular.module("babelInstruments").constant("paths", {
     home: "/",
     login: "/login",
     logout: "/logout",
+    signup: "/signup",
     instruments: "/instruments",
     instrumentDetail:"instruments/:id",
     guitarDetail: "/instruments/guitars/:id",
@@ -12,5 +13,6 @@ angular.module("babelInstruments").constant("paths", {
     guitars: "/instruments/guitars",
     basses: "/instruments/basses",
     keys: "/instruments/keys",
+    buy: "/instruments/shopping-cart",
     notFound: "/sorry"
 });

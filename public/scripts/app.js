@@ -6,14 +6,11 @@ angular.module("babelInstruments", ["ngRoute", "URL"]).config(
         }).when(paths.instruments, {
             templateUrl: 'views/InstrumentList.html'
         }).when(paths.drums, {
-            templateUrl: 'views/Drums.html'
+            templateUrl: 'views/DrumsList.html'
         }).when(paths.guitars, {
             templateUrl: 'views/GuitarList.html'
-        }).when(paths.drums, {
-            templateUrl: 'views/DrumsList.html'
         }).when(paths.keys, {
-            controller: 'KeysListController',
-            templateUrl: 'views/instrumentItemList.html'
+            templateUrl: 'views/KeysList.html'
         }).when(paths.basses, {
             templateUrl: 'views/BassList.html'
         }).when(paths.guitarDetail, {
@@ -22,10 +19,16 @@ angular.module("babelInstruments", ["ngRoute", "URL"]).config(
             templateUrl: 'views/BassDetail.html'
         }).when(paths.drumsDetail, {
             templateUrl: 'views/DrumsDetail.html'
+        }).when(paths.keysDetail, {
+            templateUrl: 'views/KeyDetail.html'
         }).when(paths.login, {
             templateUrl: 'views/Login.html'
         }).when(paths.logout, {
             templateUrl: 'views/Logout.html'
+        }).when(paths.signup, {
+            templateUrl: 'views/Signup.html'
+        }).when(paths.buy, {
+            templateUrl: 'views/BuyList.html'
         }).otherwise({
             templateUrl: 'views/404.html'
         })
